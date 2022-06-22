@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,7 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('top');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,5 +40,10 @@ Route::patch('post/{post}', [PostController::class, 'update'])->name('post.updat
 Route::delete('post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 */
 Route::post('post/comment/store', [CommentController::class, 'store'])->name('comment.store');
-Route::get('post/comment/{id}', [CommentController::class, 'show'])->name('comment.show');
-Route::delete('post/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+// お問い合わせ
+Route::get('contact/create', [ContactController::class, 'create'])->name('contact.create');
+Route::post('contact/store', [ContactController::class, 'store'])->name('contact.store');
+// 管理者画面
+Route::middleware(['can:admin'])->group(function(){
+    Route::get('profile/index', [ProfileController::class, 'index'])->name('profile.index');
+});
