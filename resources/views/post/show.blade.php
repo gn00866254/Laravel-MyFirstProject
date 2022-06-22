@@ -49,12 +49,6 @@
                     @foreach ($post->comments as $comment)
                     <div class="bg-white w-full  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500 mt-8">
                         {{$comment->body}}
-                        <hr class="w-full">
-                        <form method="post" action="{{route('comment.destroy', $comment->id)}}">
-                            @csrf
-                            @method('delete')
-                            <x-button class="bg-red-700 float-left ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-button>
-                        </form>
                         <div class="text-sm font-semibold flex flex-row-reverse">
                             <p> {{ $comment->user->name }} • {{$comment->created_at->diffForHumans()}}</p>
                         </div>

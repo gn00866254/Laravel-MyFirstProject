@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('post.mypost')" :active="request()->routeIs('post.mypost')">
                         自分の投稿
                     </x-nav-link>
+                    @can('admin')
+                    <x-nav-link :href="route('profile.index')" :active="request()->routeIs('profile.index')">
+                        ユーザー一覧
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -43,7 +48,6 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -78,6 +82,11 @@
             <x-nav-link :href="route('post.mypost')" :active="request()->routeIs('post.mypost')">
                 自分の投稿
             </x-nav-link>
+            @can('admin')
+            <x-responsive-nav-link :href="route('profile.index')" :active="request()->routeIs('profile.index')">
+                ユーザー一覧
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
